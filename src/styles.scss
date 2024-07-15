@@ -1,35 +1,26 @@
-// variables
-$primary-color: #f44336;
-$secondary-color: #ffa726;
-$warn-color: #dd2c00;
-$black-color: #212121;
-
-
-// theming
 @use '@angular/material' as mat;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './app/styles/m3-theme.scss';
 
 @include mat.core();
 
-$app-primary: mat.define-palette(mat.$red-palette, 500);
-$app-accent: mat.define-palette(mat.$orange-palette, 400, 600, A100);
-$app-warn: mat.define-palette(mat.$deep-orange-palette, A700);
-$app-black: mat.define-palette(mat.$grey-palette, 900);
-
-$app-light-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $app-primary,
-      accent: $app-accent,
-      warn: $app-warn,
-      black: $app-black,
-    ),
-    typography: mat.define-typography-config(),
-    density: 0,
-  )
-);
 
 :root {
-  @include mat.all-component-themes($app-light-theme);
+  @include mat.all-component-themes($light-theme);
+
+  
+  --primary-background: hsl(4, 90%, 58%);
+  --primary-foreground: hsl(0, 0%, 100%);
+
+  --secondary-background: hsl(36, 100%, 57%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+
+  --destructive-background: hsl(12, 100%, 43%);
+  --destructive-foreground: hsl(0, 0%, 100%);
 }
 
 
