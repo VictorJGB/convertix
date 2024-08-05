@@ -1,18 +1,14 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import './app/styles/m3-theme.scss';
+@import "./app/styles/m3-theme.scss";
 
 @include mat.core();
 
-
 :root {
-  @include mat.all-component-themes($light-theme);
-
-  
   --primary-background: hsl(4, 90%, 58%);
   --primary-foreground: hsl(0, 0%, 100%);
 
@@ -21,8 +17,21 @@
 
   --destructive-background: hsl(12, 100%, 43%);
   --destructive-foreground: hsl(0, 0%, 100%);
+
+  @include mat.all-component-themes($light-theme);
+  @include mat.color-variants-backwards-compatibility($light-theme);
 }
 
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  .mat-toolbar {
+    --mat-toolbar-container-background-color: var(--primary-background);
+    --mat-toolbar-container-text-color: var(--primary-foreground);
+  }
+}
