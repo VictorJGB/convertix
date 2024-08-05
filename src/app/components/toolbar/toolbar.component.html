@@ -13,20 +13,25 @@
       >
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="bg-primary">
-    <mat-toolbar class="grid place-items-center">
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
       <a
-        class="d-flex align-items-center justify-content-center"
+        color="primary"
+        class="flex items-center justify-center"
         mat-button
         routerLink="/"
       >
-        <h1>Conversor</h1>
+        <!-- <cc-logo-icon /> -->
+        <span class="text-xl">Convertix</span>
       </a>
       <span class="spacer"></span>
-      <div class="link-list" *ngIf="isUpMedium$ | async">
-        <a mat-button routerLink="coins">Moedas</a>
-        <a mat-button routerLink="converter">Conversor</a>
-        <a mat-button routerLink="history">Histórico</a>
+      <div
+        class="grid grid-cols-3 place-items-center gap-2"
+        *ngIf="isUpMedium$ | async"
+      >
+        <a color="primary" mat-button routerLink="coins">Moedas</a>
+        <a color="primary" mat-button routerLink="converter">Conversor</a>
+        <a color="primary" mat-button routerLink="history">Histórico</a>
       </div>
       <button
         type="button"

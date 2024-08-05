@@ -20,6 +20,12 @@
 
   @include mat.all-component-themes($light-theme);
   @include mat.color-variants-backwards-compatibility($light-theme);
+
+  --mat-toolbar-container-background-color: #{mat.get-theme-color(
+      $light-theme,
+      primary,
+      90
+    )};
 }
 
 html,
@@ -29,9 +35,4 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-
-  .mat-toolbar {
-    --mat-toolbar-container-background-color: var(--primary-background);
-    --mat-toolbar-container-text-color: var(--primary-foreground);
-  }
 }
