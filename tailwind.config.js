@@ -12,6 +12,7 @@ module.exports = {
         primary: {
           20: "var(--primary-20)",
           40: "var(--primary-40)",
+          80: "var(--primary-80)",
           foreground: "var(--primary-foreground)",
         },
         secondary: {

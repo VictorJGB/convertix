@@ -1,0 +1,48 @@
+<footer
+  class="place-items-center grid grid-cols-1 md:grid-cols-3 grid-rows-3 md:grid-rows-1 bg-primary-20 min-w-full h-20"
+>
+  <!-- logo -->
+  <div class="flex justify-center items-center gap-2">
+    <img class="w-10" src="favicon.png" />
+    <h2 class="text-primary-80 text-xl">Convertix</h2>
+  </div>
+
+  <!-- links -->
+  <div>
+    <h2 class="text-primary-80">Páginas</h2>
+    <nav>
+      <a mat-button routerLink="/">
+        <span class="text-primary-foreground">Moedas</span>
+      </a>
+      <a mat-button routerLink="/">
+        <span class="text-primary-foreground">Conversor</span>
+      </a>
+      <a mat-button routerLink="/">
+        <span class="text-primary-foreground">Histórico</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Redirects -->
+  <div>
+    <h2>Saiba mais</h2>
+    <div>
+      <a
+        class="hover:text-primary-80 transition"
+        matTooltip="Frank Furter API"
+        href="https://www.frankfurter.app/"
+        target="_blank"
+      >
+        <fa-icon size="lg" [icon]="link" />
+      </a>
+      <a
+        class="hover:text-primary-80 transition"
+        matTooltip="Repositório"
+        href="https://github.com/VictorJGB/currency-converter-v2"
+        target="_blank"
+      >
+        <fa-icon size="lg" [icon]="github" />
+      </a>
+    </div>
+  </div>
+</footer>
