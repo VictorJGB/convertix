@@ -1,22 +1,34 @@
 <div
-  class="grid grid-cols-1 md:grid-cols-2 grid-rows-2 md:grid-rows-1 col-span-1 row-span-1"
+  class="grid grid-cols-1 col-span-1 grid-rows-2 row-span-1 md:grid-cols-2 md:grid-rows-1"
 >
   <!-- image -->
-  <div class="items-center grid">
-    <h1>image</h1>
+  <div class="grid place-items-center">
+    <img class="w-2/3" src="/assets/home/financial.png" alt="Financeiro" />
   </div>
 
   <!-- info -->
-  <div class="items-center grid">
-    <h1>Infos</h1>
+  <div
+    class="flex flex-col items-start justify-center min-w-full gap-2 px-4 md:px-20"
+  >
+    <h1 class="text-3xl font-medium text-primary-80">
+      Rápido, Fácil e Intuitivo
+    </h1>
     <p>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, corporis?
-      Laboriosam earum eum a! Fugit quam quis, saepe repellat ea beatae. Placeat
-      fuga blanditiis quos rerum alias itaque sapiente ducimus. Aspernatur
-      commodi ea debitis ipsam, dolor eligendi consequuntur aperiam perferendis?
+      O Conversor de Moedas
+      <span class="font-medium text-primary-80">Convertix</span> é uma
+      ferramenta inovadora e fácil de usar que permite converter valores entre
+      diferentes moedas em tempo real. Com uma interface intuitiva e design
+      moderno, o projeto oferece uma experiência de usuário agradável e
+      eficiente.
     </p>
-    <div>
-      <h1>links</h1>
+    <div class="grid gap-3 mt-6 place-items-start place-content-center">
+      <h1 class="text-xl font-medium text-primary-80">Feito com</h1>
+      <div class="flex items-start justify-center gap-2">
+        <mat-chip matTooltip="Saiba Mais">Angular</mat-chip>
+        <mat-chip matTooltip="Saiba Mais">TailwindCSS</mat-chip>
+        <mat-chip matTooltip="Saiba Mais">Angular Material</mat-chip>
+        <mat-chip matTooltip="Saiba Mais">FrankFurter API</mat-chip>
+      </div>
     </div>
   </div>
 </div>
