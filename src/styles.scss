@@ -9,23 +9,25 @@
 @include mat.core();
 
 :root {
-  --primary-background: hsl(4, 90%, 58%);
+  // tailwind theme
+  --neutral-10: hsl(180, 6%, 10%);
+  --neutral-40: hsl(180, 2%, 36%);
+  --neutral-foreground: hsl(0, 0%, 100%);
+
+  --primary-20: hsl(180, 100%, 11%);
+  --primary-40: hsl(180, 100%, 21%);
   --primary-foreground: hsl(0, 0%, 100%);
 
-  --secondary-background: hsl(36, 100%, 57%);
+  --secondary-20: hsl(180, 39%, 15%);
+  --secondary-40: hsl(178, 18%, 33%);
   --secondary-foreground: hsl(0, 0%, 100%);
 
-  --destructive-background: hsl(12, 100%, 43%);
+  --desctructive-20: hsl(357, 100%, 21%);
+  --destructive-40: hsl(0, 75%, 42%);
   --destructive-foreground: hsl(0, 0%, 100%);
 
-  @include mat.all-component-themes($light-theme);
-  @include mat.color-variants-backwards-compatibility($light-theme);
-
-  --mat-toolbar-container-background-color: #{mat.get-theme-color(
-      $light-theme,
-      primary,
-      90
-    )};
+  @include mat.all-component-themes($theme);
+  @include mat.color-variants-backwards-compatibility($theme);
 }
 
 html,
@@ -35,4 +37,13 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #{mat.get-theme-color($theme, neutral, 10)};
+  color: #{mat.get-theme-color($theme, neutral, 100)};
+
+  // angular material toolbar style
+  --mat-toolbar-container-background-color: #{mat.get-theme-color(
+      $theme,
+      primary,
+      20
+    )};
 }

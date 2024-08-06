@@ -1,26 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{html,ts}",
-  ],
+  content: ["./src/**/*.{html,ts}"],
   theme: {
     extend: {
       colors: {
+        neutral: {
+          10: "var(--neutral-10)",
+          40: "var(--neutral-40)",
+          foreground: "var(--neutral-foreground)",
+        },
         primary: {
-          DEFAULT: 'var(--primary-background)',
-          foreground: 'var(--primary-foreground)'
+          20: "var(--primary-20)",
+          40: "var(--primary-40)",
+          foreground: "var(--primary-foreground)",
         },
         secondary: {
-          DEFAULT: 'var(--secondary-background)',
-          foreground: 'var(--secondary-foreground)'
+          20: "var(--secondary-20)",
+          40: "var(--secondary-40)",
+          foreground: "var(--secondary-foreground)",
         },
         destructive: {
-          DEFAULT: 'var(--destructive-background)',
-          foreground: 'var(--destructive-foreground)'
-        }
-      }
+          20: "var(--destructive-20)",
+          40: "var(--destructive-40)",
+          foreground: "var(--destructive-foreground)",
+        },
+      },
     },
   },
   plugins: [],
-}
-
+};
