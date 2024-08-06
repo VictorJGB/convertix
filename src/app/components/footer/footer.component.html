@@ -1,5 +1,5 @@
 <footer
-  class="place-items-center grid grid-cols-1 md:grid-cols-3 grid-rows-3 md:grid-rows-1 bg-primary-20 min-w-full h-20"
+  class="place-items-center grid grid-cols-1 md:grid-cols-3 grid-rows-3 md:grid-rows-1 bg-primary-20 py-3 min-w-full"
 >
   <!-- logo -->
   <div class="flex justify-center items-center gap-2">
@@ -8,9 +8,9 @@
   </div>
 
   <!-- links -->
-  <div>
-    <h2 class="text-primary-80">Páginas</h2>
-    <nav>
+  <div class="place-items-center gap-2 grid">
+    <h2 class="text-primary-80 text-xl">Páginas</h2>
+    <nav class="place-items-center grid">
       <a mat-button routerLink="/">
         <span class="text-primary-foreground">Moedas</span>
       </a>
@@ -24,9 +24,9 @@
   </div>
 
   <!-- Redirects -->
-  <div>
-    <h2>Saiba mais</h2>
-    <div>
+  <div class="place-items-center gap-3 grid">
+    <h2 class="text-primary-80 text-xl">Saiba mais</h2>
+    <div class="place-items-center gap-3 grid grid-cols-2">
       <a
         class="hover:text-primary-80 transition"
         matTooltip="Frank Furter API"
