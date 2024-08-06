@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport>
-    <mat-toolbar class="bg-primary grid place-items-center">
+    <mat-toolbar class="place-items-center grid bg-primary">
       <h1>Conversor</h1>
     </mat-toolbar>
     <mat-nav-list>
@@ -17,7 +17,7 @@
     <mat-toolbar color="primary">
       <a
         color="primary"
-        class="flex items-center justify-center"
+        class="flex justify-center items-center"
         mat-button
         routerLink="/"
       >
@@ -26,12 +26,12 @@
       </a>
       <span class="spacer"></span>
       <div
-        class="grid grid-cols-3 place-items-center gap-2"
+        class="place-items-center gap-2 grid grid-cols-3"
         *ngIf="isUpMedium$ | async"
       >
-        <a mat-button color="primary" routerLink="coins">Moedas</a>
-        <a mat-button color="primary" routerLink="converter">Conversor</a>
-        <a mat-button color="primary" routerLink="history">Histórico</a>
+        <a mat-button color="primary" routerLink="/moedas">Moedas</a>
+        <a mat-button color="primary" routerLink="/conversor">Conversor</a>
+        <a mat-button color="primary" routerLink="/historico">Histórico</a>
       </div>
       <button
         type="button"
