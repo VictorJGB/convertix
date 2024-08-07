@@ -49,11 +49,13 @@ body {
     )};
 
   // chip toolbar
-  --mdc-chip-elevated-container-color: #{mat.get-theme-color(
-      $theme,
-      secondary,
-      20
-    )};
+  mat-chip {
+    --mdc-chip-elevated-container-color: #{mat.get-theme-color(
+        $theme,
+        secondary,
+        20
+      )};
 
-  --mdc-chip-label-text-color: #{mat.get-theme-color($theme, primary, 80)};
+    --mdc-chip-label-text-color: #{mat.get-theme-color($theme, primary, 80)};
+  }
 }
