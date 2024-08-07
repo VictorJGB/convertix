@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 
-// Components
-import { MatTableModule } from '@angular/material/table';
+// Material
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 export interface PeriodicElement {
   name: string;
@@ -24,16 +28,40 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 /**
- * @title Basic use of `<table mat-table>`
+ * @title Coins table component
  */
 @Component({
   selector: 'app-coins-table',
   styleUrl: 'coins-table.component.scss',
   templateUrl: 'coins-table.component.html',
   standalone: true,
-  imports: [MatTableModule],
+  imports: [
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSortModule,
+    MatPaginatorModule,
+  ],
 })
-export class CoinsTableComponent {
+export class CoinsTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 }
