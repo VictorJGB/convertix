@@ -4,13 +4,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
-interface CoinsResponse {
-  [key: string]: string;
-}
-
-interface Coin {
+export interface Coin {
   code: string;
   value: string;
+}
+
+export interface ConvertResponse {
+  amount: number;
+  base: string;
+  date: string;
+  rates: {
+    USD: number;
+  };
 }
 
 @Injectable({
@@ -19,7 +24,7 @@ interface Coin {
 export class CoinsService {
   constructor(private http: HttpClient) {}
 
-  API_URL = 'https://api.frankfurter.app';
+  private API_URL = 'https://api.frankfurter.app';
 
   getCoins(): Observable<Coin[]> {
     return this.http.get<Coin>(`${this.API_URL}/currencies`).pipe(
@@ -30,5 +35,25 @@ export class CoinsService {
         });
       })
     );
+  }
+
+  convertCoins(
+    amount: number,
+    from: string,
+    to: string
+  ): Observable<ConvertResponse> {
+    /**
+     * @title HTTP Call for conversions
+     */
+
+    const params = {
+      amount,
+      from,
+      to,
+    };
+
+    return this.http.get<ConvertResponse>(`${this.API_URL}/latest`, {
+      params,
+    });
   }
 }

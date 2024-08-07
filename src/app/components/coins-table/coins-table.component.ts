@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
 
 // Material
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -6,13 +7,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Observable } from 'rxjs';
-import { CoinsService } from '../../services/coins.service';
 
-interface Coin {
-  code: string;
-  value: string;
-}
+// services
+import { Coin, CoinsService } from 'services/coins.service';
 
 /**
  * @title Coins table component
