@@ -1,14 +1,20 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport>
-    <mat-toolbar class="place-items-center grid bg-primary">
-      <h1>Conversor</h1>
+<mat-sidenav-container
+  class="sidenav-container"
+  (backdropClick)="drawer.toggle()"
+  [hasBackdrop]="true"
+>
+  <mat-sidenav #drawer class="z-10 sidenav" fixedInViewport>
+    <mat-toolbar class="grid place-items-center">
+      <a mat-button routerLink="/" (click)="drawer.toggle()">
+        <span class="text-xl tex-primary-80">Convertix</span></a
+      >
     </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="coins" (click)="drawer.toggle()">Listagem</a>
-      <a mat-list-item routerLink="converter" (click)="drawer.toggle()"
+      <a mat-list-item routerLink="/moedas" (click)="drawer.toggle()">Moedas</a>
+      <a mat-list-item routerLink="/conversor" (click)="drawer.toggle()"
         >Conversor</a
       >
-      <a mat-list-item routerLink="history" (click)="drawer.toggle()"
+      <a mat-list-item routerLink="/historico" (click)="drawer.toggle()"
         >Histórico</a
       >
     </mat-nav-list>
@@ -17,7 +23,7 @@
     <mat-toolbar color="primary">
       <a
         color="primary"
-        class="flex justify-center items-center"
+        class="flex items-center justify-center"
         mat-button
         routerLink="/"
       >
@@ -26,7 +32,7 @@
       </a>
       <span class="spacer"></span>
       <div
-        class="place-items-center gap-2 grid grid-cols-3"
+        class="grid grid-cols-3 gap-2 place-items-center"
         *ngIf="isUpMedium$ | async"
       >
         <a mat-button color="primary" routerLink="/moedas">Moedas</a>

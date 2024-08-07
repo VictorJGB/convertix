@@ -58,4 +58,9 @@ body {
 
     --mdc-chip-label-text-color: #{mat.get-theme-color($theme, primary, 80)};
   }
+
+  // drawer backdrop
+  .mat-drawer-backdrop {
+    position: fixed !important;
+  }
 }
