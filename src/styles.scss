@@ -63,4 +63,10 @@ body {
   .mat-drawer-backdrop {
     position: fixed !important;
   }
+
+  // table
+  .mat-mdc-header-cell {
+    background-color: #{mat.get-theme-color($theme, primary, 20)} !important;
+    color: #{mat.get-theme-color($theme, primary, 80)} !important;
+  }
 }
