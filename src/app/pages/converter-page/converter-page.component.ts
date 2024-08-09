@@ -73,12 +73,17 @@ export class ConverterPageComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Converting coins
-    this.coinsService
-      .convertCoins(10, 'BRL', 'USD')
-      .subscribe((response) => console.log('convert response', response));
-
       // Getting coins
       this.coins$ = this.coinsService.getCoins()
+  }
+
+  onSubmit(): void {
+    // Retrieving form values
+    const {amount, from, to } = this.convertForm.value
+    
+    // Calling the service to convert the amount
+    this.coinsService.convertCoins(amount, from, to).subscribe({
+      next: (response) => console.log(response)
+    })
   }
 }

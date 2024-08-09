@@ -5,6 +5,7 @@
 
   <!-- Form -->
   <form
+  (ngSubmit)="onSubmit()"
     [formGroup]="convertForm"
     class="container flex flex-col items-center justify-center gap-4"
   >
@@ -24,7 +25,7 @@
       <mat-label>Moeda de Origem</mat-label>
       <mat-select formControlName="from" required>
         @for (coin of coins; track coin) {
-        <mat-option [value]="coin">{{ coin.value }}</mat-option>
+        <mat-option [value]="coin.code">{{ coin.value }}</mat-option>
         }
       </mat-select>
       @if (formControl.hasError('required')) {
@@ -37,7 +38,7 @@
       <mat-label>Moeda de Destino</mat-label>
       <mat-select formControlName="to" required>
         @for (coin of coins; track coin) {
-        <mat-option [value]="coin">{{ coin.value }}</mat-option>
+        <mat-option [value]="coin.code">{{ coin.value }}</mat-option>
         }
       </mat-select>
       @if (formControl.hasError('required')) {
