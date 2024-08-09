@@ -6,42 +6,48 @@
   <!-- Form -->
   <form
     [formGroup]="convertForm"
-    class="container flex items-center justify-center gap-6"
+    class="container flex flex-col items-center justify-center gap-4"
   >
+  @if (coins$ | async; as coins) {
+  <div class="flex items-center justify-center gap-6">
     <!-- amount form field -->
     <mat-form-field>
       <mat-label>Quantidade</mat-label>
-      <input type="number" formControlName="amount" matInput />
+      <input type="number" placeholder="Ex: 10" formControlName="amount" matInput />
+      @if (formControl.hasError('required')) {
+        <mat-error>Quantidade inválida</mat-error>
+      }
     </mat-form-field>
 
     <!-- FROM form field -->
     <mat-form-field>
       <mat-label>Moeda de Origem</mat-label>
       <mat-select formControlName="from" required>
-        <mat-option>--</mat-option>
-        @for (animal of animals; track animal) {
-        <mat-option [value]="animal">{{ animal.name }}</mat-option>
+        @for (coin of coins; track coin) {
+        <mat-option [value]="coin">{{ coin.value }}</mat-option>
         }
       </mat-select>
       @if (formControl.hasError('required')) {
-      <mat-error>Please choose an animal</mat-error>
+      <mat-error>Escolha uma moeda de origem</mat-error>
       }
-      <mat-hint>{{ formControl.value?.sound }}</mat-hint>
     </mat-form-field>
 
     <!-- TO form field -->
     <mat-form-field>
       <mat-label>Moeda de Destino</mat-label>
       <mat-select formControlName="to" required>
-        <mat-option>--</mat-option>
-        @for (animal of animals; track animal) {
-        <mat-option [value]="animal">{{ animal.name }}</mat-option>
+        @for (coin of coins; track coin) {
+        <mat-option [value]="coin">{{ coin.value }}</mat-option>
         }
       </mat-select>
       @if (formControl.hasError('required')) {
-      <mat-error>Please choose an animal</mat-error>
+      <mat-error>Escolha uma moeda de destino</mat-error>
       }
-      <mat-hint>{{ formControl.value?.sound }}</mat-hint>
     </mat-form-field>
+  </div>
+}
+
+  <!-- Submit button -->
+  <button mat-flat-button type="submit">Converter</button>
   </form>
 </div>

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { AfterViewInit, Component } from '@angular/core';
 
 // Forms
@@ -12,12 +12,14 @@ import {
 } from '@angular/forms';
 
 // Material
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { CoinsService } from 'services/coins.service';
+import { Observable } from 'rxjs';
 
 // services
+import { Coin, CoinsService } from 'services/coins.service';
 
 interface Animal {
   name: string;
@@ -31,9 +33,11 @@ interface Animal {
     CommonModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule,
+    AsyncPipe
   ],
   templateUrl: './converter-page.component.html',
   styleUrl: './converter-page.component.scss',
@@ -55,21 +59,26 @@ export class ConverterPageComponent implements AfterViewInit {
     { name: 'Cow', sound: 'Moo!' },
     { name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!' },
   ];
+  coins$!: Observable<Coin[]>
 
   constructor(
     private readonly coinsService: CoinsService,
     private readonly formBuilder: FormBuilder
   ) {
     this.convertForm = this.formBuilder.group({
-      amount: [10, Validators.required],
+      amount: [null, Validators.required],
       from: ['', Validators.required],
       to: ['', Validators.required],
     });
   }
 
   ngAfterViewInit(): void {
+    // Converting coins
     this.coinsService
       .convertCoins(10, 'BRL', 'USD')
       .subscribe((response) => console.log('convert response', response));
+
+      // Getting coins
+      this.coins$ = this.coinsService.getCoins()
   }
 }
