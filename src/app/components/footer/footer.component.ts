@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, type OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
@@ -15,11 +15,8 @@ import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
   standalone: true,
   imports: [CommonModule, FontAwesomeModule, MatButtonModule, MatTooltipModule],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss',
 })
-export class FooterComponent implements OnInit {
-  ngOnInit(): void {}
-
+export class FooterComponent {
   github = faGithub;
   link = faArrowUpRightFromSquare;
 }

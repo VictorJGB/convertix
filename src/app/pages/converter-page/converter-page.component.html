@@ -15,7 +15,7 @@
     <mat-form-field>
       <mat-label>Quantidade</mat-label>
       <input type="number" placeholder="Ex: 10" formControlName="amount" matInput />
-      @if (formControl.hasError('required')) {
+      @if (convertForm.controls['amount'].hasError('required')) {
         <mat-error>Quantidade inválida</mat-error>
       }
     </mat-form-field>
@@ -28,7 +28,7 @@
         <mat-option [value]="coin.code">{{ coin.value }}</mat-option>
         }
       </mat-select>
-      @if (formControl.hasError('required')) {
+      @if (convertForm.controls['from'].hasError('required')) {
       <mat-error>Escolha uma moeda de origem</mat-error>
       }
     </mat-form-field>
@@ -41,7 +41,7 @@
         <mat-option [value]="coin.code">{{ coin.value }}</mat-option>
         }
       </mat-select>
-      @if (formControl.hasError('required')) {
+      @if (convertForm.controls['to'].hasError('required')) {
       <mat-error>Escolha uma moeda de destino</mat-error>
       }
     </mat-form-field>
@@ -49,6 +49,12 @@
 }
 
   <!-- Submit button -->
-  <button mat-flat-button type="submit">Converter</button>
+  <button mat-fab extended color="primary" [disabled]="convertForm.invalid || isSubmitting" type="submit">
+    @if(isSubmitting) { <fa-icon class="mr-2" size="lg" [icon]="loadingIcon" animation="spin" /> }
+    Converter
+  </button>
   </form>
+
+  <!-- result card -->
+   @if(convertResponse){ <app-convert-result-card [amount]="convertForm.value.amount" [originCoin]="convertForm.value.from" [destinyCoin]="convertForm.value.to" [result]="convertResponse.rates[convertForm.value.to]"/> }
 </div>

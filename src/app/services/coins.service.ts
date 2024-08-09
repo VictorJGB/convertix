@@ -13,9 +13,7 @@ export interface ConvertResponse {
   amount: number;
   base: string;
   date: string;
-  rates: {
-    USD: number;
-  };
+  rates: Record<string, number>;
 }
 
 @Injectable({
@@ -28,7 +26,7 @@ export class CoinsService {
 
   getCoins(): Observable<Coin[]> {
     return this.http.get<Coin>(`${this.API_URL}/currencies`).pipe(
-      map((response, index) => {
+      map((response) => {
         // converting response
         return Object.entries(response).map(([code, value]) => {
           return { code, value };

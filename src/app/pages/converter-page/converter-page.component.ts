@@ -4,11 +4,10 @@ import { AfterViewInit, Component } from '@angular/core';
 // Forms
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
+  Validators
 } from '@angular/forms';
 
 // Material
@@ -18,13 +17,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Observable } from 'rxjs';
 
-// services
-import { Coin, CoinsService } from 'services/coins.service';
+// Icons
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 
-interface Animal {
-  name: string;
-  sound: string;
-}
+// services
+import { Coin, CoinsService, ConvertResponse } from 'services/coins.service';
+import { ConvertResultCardComponent } from "../../components/convert-result-card/convert-result-card.component";
+
 
 @Component({
   selector: 'converter-page',
@@ -37,11 +37,14 @@ interface Animal {
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    AsyncPipe
-  ],
+    AsyncPipe,
+    FontAwesomeModule,
+    ConvertResultCardComponent
+],
   templateUrl: './converter-page.component.html',
   styleUrl: './converter-page.component.scss',
 })
+
 export class ConverterPageComponent implements AfterViewInit {
   /**
    * Constructor for the ConverterPageComponent.
@@ -50,23 +53,20 @@ export class ConverterPageComponent implements AfterViewInit {
    * @param formBuilder The FormBuilder instance.
    */
 
-  formControl = new FormControl<Animal | null>(null, Validators.required);
-
   convertForm!: FormGroup;
-  animals: Animal[] = [
-    { name: 'Dog', sound: 'Woof!' },
-    { name: 'Cat', sound: 'Meow!' },
-    { name: 'Cow', sound: 'Moo!' },
-    { name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!' },
-  ];
   coins$!: Observable<Coin[]>
+  convertResponse!: ConvertResponse
+  isSubmitting = false
+
+  // icons const
+  loadingIcon = faRotateRight
 
   constructor(
     private readonly coinsService: CoinsService,
     private readonly formBuilder: FormBuilder
   ) {
     this.convertForm = this.formBuilder.group({
-      amount: [null, Validators.required],
+      amount: [10, Validators.required],
       from: ['', Validators.required],
       to: ['', Validators.required],
     });
@@ -78,12 +78,15 @@ export class ConverterPageComponent implements AfterViewInit {
   }
 
   onSubmit(): void {
+    this.isSubmitting = true
+
     // Retrieving form values
     const {amount, from, to } = this.convertForm.value
-    
+
     // Calling the service to convert the amount
     this.coinsService.convertCoins(amount, from, to).subscribe({
-      next: (response) => console.log(response)
+      next: (response) => this.convertResponse = response,
+      complete: () => this.isSubmitting = false
     })
   }
 }
