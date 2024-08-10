@@ -1,16 +1,16 @@
 <footer
-  class="place-items-center grid grid-cols-1 md:grid-cols-3 grid-rows-3 md:grid-rows-1 bg-primary-20 py-3 min-w-full"
+  class="grid min-w-full grid-cols-1 grid-rows-3 py-3 place-items-center md:grid-cols-3 md:grid-rows-1 bg-primary-20"
 >
   <!-- logo -->
-  <div class="flex justify-center items-center gap-2">
+  <div class="flex items-center justify-center gap-2">
     <img class="w-10" src="favicon.png" />
-    <h2 class="text-primary-80 text-xl">Convertix</h2>
+    <h2 class="text-xl text-primary-80">Convertix</h2>
   </div>
 
   <!-- links -->
-  <div class="place-items-center gap-2 grid">
-    <h2 class="text-primary-80 text-xl">Páginas</h2>
-    <nav class="place-items-center grid">
+  <div class="grid gap-2 place-items-center">
+    <h2 class="text-xl text-primary-80">Páginas</h2>
+    <nav class="grid place-items-center">
       <a mat-button routerLink="/">
         <span class="text-primary-foreground">Moedas</span>
       </a>
@@ -24,11 +24,11 @@
   </div>
 
   <!-- Redirects -->
-  <div class="place-items-center gap-3 grid">
-    <h2 class="text-primary-80 text-xl">Saiba mais</h2>
-    <div class="place-items-center gap-3 grid grid-cols-2">
+  <div class="grid gap-3 place-items-center">
+    <h2 class="text-xl text-primary-80">Saiba mais</h2>
+    <div class="grid grid-cols-2 gap-3 place-items-center">
       <a
-        class="hover:text-primary-80 transition"
+        class="transition hover:text-primary-80"
         matTooltip="Frank Furter API"
         href="https://www.frankfurter.app/"
         target="_blank"
@@ -36,9 +36,9 @@
         <fa-icon size="lg" [icon]="link" />
       </a>
       <a
-        class="hover:text-primary-80 transition"
+        class="transition hover:text-primary-80"
         matTooltip="Repositório"
-        href="https://github.com/VictorJGB/currency-converter-v2"
+        href="https://github.com/VictorJGB/convertix"
         target="_blank"
       >
         <fa-icon size="lg" [icon]="github" />
