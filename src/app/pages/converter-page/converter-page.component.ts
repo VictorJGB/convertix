@@ -1,28 +1,30 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { AfterViewInit, Component } from '@angular/core';
 
 // Forms
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
+  Validators
 } from '@angular/forms';
 
 // Material
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { CoinsService } from 'services/coins.service';
+import { Observable } from 'rxjs';
+
+// Icons
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 
 // services
+import { Coin, CoinsService, ConvertResponse } from 'services/coins.service';
+import { ConvertResultCardComponent } from "../../components/convert-result-card/convert-result-card.component";
 
-interface Animal {
-  name: string;
-  sound: string;
-}
 
 @Component({
   selector: 'converter-page',
@@ -31,13 +33,18 @@ interface Animal {
     CommonModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule,
-  ],
+    AsyncPipe,
+    FontAwesomeModule,
+    ConvertResultCardComponent
+],
   templateUrl: './converter-page.component.html',
   styleUrl: './converter-page.component.scss',
 })
+
 export class ConverterPageComponent implements AfterViewInit {
   /**
    * Constructor for the ConverterPageComponent.
@@ -46,15 +53,13 @@ export class ConverterPageComponent implements AfterViewInit {
    * @param formBuilder The FormBuilder instance.
    */
 
-  formControl = new FormControl<Animal | null>(null, Validators.required);
-
   convertForm!: FormGroup;
-  animals: Animal[] = [
-    { name: 'Dog', sound: 'Woof!' },
-    { name: 'Cat', sound: 'Meow!' },
-    { name: 'Cow', sound: 'Moo!' },
-    { name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!' },
-  ];
+  coins$!: Observable<Coin[]>
+  convertResponse!: ConvertResponse
+  isSubmitting = false
+
+  // icons const
+  loadingIcon = faRotateRight
 
   constructor(
     private readonly coinsService: CoinsService,
@@ -68,8 +73,27 @@ export class ConverterPageComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.coinsService
-      .convertCoins(10, 'BRL', 'USD')
-      .subscribe((response) => console.log('convert response', response));
+      // Getting coins
+      this.coins$ = this.coinsService.getCoins()
+  }
+
+  findCoinLabel(coin: string, data: Coin[]): string {
+    const labelData = data.find(({code}) => coin === code)
+
+    return labelData?.value ?? ''
+  }
+
+  onSubmit(): void {
+    // loading Control
+    this.isSubmitting = true
+
+    // Retrieving form values
+    const {amount, from, to } = this.convertForm.value
+
+    // Calling the service to convert the amount
+    this.coinsService.convertCoins(amount, from, to).subscribe({
+      next: (response) => this.convertResponse = response,
+      complete: () => this.isSubmitting = false
+    })
   }
 }

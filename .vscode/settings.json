@@ -7,10 +7,12 @@
     },
     "angular-*": {
       "style": "scss",
-      "externalTemplate": true
+      "externalTemplate": true,
+      "skipStyle": true
     },
     "angular-page": {
-      "skipChangeDetectionOnPush": true
+      "skipChangeDetectionOnPush": true,
+      "skipNgOnInit": false
     }
   }
 }

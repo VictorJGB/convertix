@@ -16,7 +16,6 @@ import { Coin, CoinsService } from 'services/coins.service';
  */
 @Component({
   selector: 'app-coins-table',
-  styleUrl: 'coins-table.component.scss',
   templateUrl: 'coins-table.component.html',
   standalone: true,
   imports: [

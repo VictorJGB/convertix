@@ -13,16 +13,16 @@ export const routes: Routes = [
   {
     path: 'moedas',
     component: CoinsPageComponent,
-    title: 'Moedas | Convertix',
+    title: 'Convertix | Moedas',
   },
   {
     path: 'conversor',
     component: ConverterPageComponent,
-    title: 'Conversor | Convertix',
+    title: 'Convertix | Conversor',
   },
   {
     path: 'historico',
     component: HistoryPageComponent,
-    title: 'Histórico | Convertix',
+    title: 'Convertix | Histórico',
   },
 ];

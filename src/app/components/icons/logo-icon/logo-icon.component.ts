@@ -6,11 +6,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 const LOGO_ICON = '/assets/logo-primary.svg';
 
 @Component({
-  selector: 'cc-logo-icon',
+  selector: 'app-logo-icon',
   standalone: true,
   imports: [CommonModule, MatIconModule],
   templateUrl: './logo-icon.component.html',
-  styleUrl: './logo-icon.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogoIconComponent {

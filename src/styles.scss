@@ -69,4 +69,14 @@ body {
     background-color: #{mat.get-theme-color($theme, primary, 20)} !important;
     color: #{mat.get-theme-color($theme, primary, 80)} !important;
   }
+
+  // mat-option
+    .mat-mdc-option, .mat-mdc-select-panel{ 
+      background-color: #{mat.get-theme-color($theme, neutral-variant, 20)} !important;
+  }
+
+    .mat-mdc-option:hover, .mat-mdc-option-active {
+      background-color: #{mat.get-theme-color($theme, neutral-variant, 30)} !important;
+    }
+
 }
