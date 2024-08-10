@@ -77,7 +77,14 @@ export class ConverterPageComponent implements AfterViewInit {
       this.coins$ = this.coinsService.getCoins()
   }
 
+  findCoinLabel(coin: string, data: Coin[]): string {
+    const labelData = data.find(({code}) => coin === code)
+
+    return labelData?.value ?? ''
+  }
+
   onSubmit(): void {
+    // loading Control
     this.isSubmitting = true
 
     // Retrieving form values

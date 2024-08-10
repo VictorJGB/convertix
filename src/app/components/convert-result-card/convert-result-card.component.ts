@@ -1,24 +1,36 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
+// material
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+
 @Component({
   selector: 'app-convert-result-card',
   standalone: true,
   imports: [
     CommonModule,
+    MatIconModule,
+    MatTooltip
   ],
   templateUrl: './convert-result-card.component.html',
 })
 export class ConvertResultCardComponent  {
 
+  // amount
   @Input()
-  amount!: number;
+  amount = 10;
+  // origin coin
   @Input()
-  originCoin!: string;
+  originCoin = 'BRL';
   @Input()
-  destinyCoin!: string;
+  originCoinLabel = 'Brazilian Real';
+  // destination coin
   @Input()
-  result!: number;
-
-  hasData = this.amount && this.originCoin && this.destinyCoin ? true : false
+  destinyCoin = 'USD';
+  @Input()
+  destinyCoinLabel = 'Australian Dollar';
+  // result
+  @Input()
+  result = 36.01;
 }
