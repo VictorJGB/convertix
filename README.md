@@ -28,7 +28,7 @@
 
 ## About The Project
 
-project description
+An easy, quick and intuitive currency converter made with angular material and a couple more tools
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
