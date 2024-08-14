@@ -1,5 +1,6 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { AfterViewInit, Component } from '@angular/core';
+import { Observable } from 'rxjs';
 
 // Forms
 import {
@@ -14,20 +15,23 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-import { Observable } from 'rxjs';
+
+// components
+import { ConvertResultCardComponent } from "@components/convert-result-card/convert-result-card.component";
 
 // Icons
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 
 // services
-import { Coin, CoinsService, ConvertResponse } from 'services/coins.service';
-import { ConvertResultCardComponent } from "../../components/convert-result-card/convert-result-card.component";
+import { Coin, CoinsService, ConvertResponse } from '@services/coins.service';
+import { LoadingService } from '@services/loading.service';
 
 
 @Component({
-  selector: 'converter-page',
+  selector: 'app-converter-page',
   standalone: true,
   imports: [
     CommonModule,
@@ -35,6 +39,7 @@ import { ConvertResultCardComponent } from "../../components/convert-result-card
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
     AsyncPipe,
@@ -57,14 +62,18 @@ export class ConverterPageComponent implements AfterViewInit {
   coins$!: Observable<Coin[]>
   convertResponse!: ConvertResponse
   isSubmitting = false
+  isLoading$!: Observable<boolean>
 
   // icons const
   loadingIcon = faRotateRight
 
   constructor(
     private readonly coinsService: CoinsService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly loadingService: LoadingService
   ) {
+    this.isLoading$ = loadingService.getLoading()
+
     this.convertForm = this.formBuilder.group({
       amount: [10, Validators.required],
       from: ['', Validators.required],

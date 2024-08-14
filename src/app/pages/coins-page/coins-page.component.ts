@@ -1,16 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, type OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 // Components
-import { CoinsTableComponent } from 'components/coins-table/coins-table.component';
+import { CoinsTableComponent } from '@components/tables/coins-table/coins-table.component';
 
 @Component({
-  selector: 'coins-page',
+  selector: 'app-coins-page',
   standalone: true,
   imports: [CommonModule, CoinsTableComponent],
   templateUrl: './coins-page.component.html',
   styleUrl: './coins-page.component.scss',
 })
-export class CoinsPageComponent implements OnInit {
-  ngOnInit(): void {}
+export class CoinsPageComponent{
 }

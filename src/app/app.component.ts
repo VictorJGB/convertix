@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 // Shared Modules
-import { PagesModule } from 'pages/pages.module';
-import { ComponentsModule } from './components/components.module';
+import { ComponentsModule } from '@components/components.module';
+import { PagesModule } from '@pages/pages.module';
 
 @Component({
   selector: 'app-root',

@@ -9,7 +9,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 // services
-import { Coin, CoinsService } from 'services/coins.service';
+import { Coin, CoinsService } from '@services/coins.service';
 
 /**
  * @title Coins table component

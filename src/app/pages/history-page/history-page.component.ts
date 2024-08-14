@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, type OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ComponentsModule } from "@components/components.module";
 
 @Component({
-  selector: 'history-page',
+  selector: 'app-history-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ComponentsModule],
   templateUrl: './history-page.component.html',
   styleUrl: './history-page.component.scss',
 })
-export class HistoryPageComponent implements OnInit {
-  ngOnInit(): void {}
+export class HistoryPageComponent{
 }

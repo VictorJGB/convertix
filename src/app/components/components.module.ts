@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 
 // Components
-import { CoinsTableComponent } from './coins-table/coins-table.component';
 import { ConvertResultCardComponent } from './convert-result-card/convert-result-card.component';
 import { FooterComponent } from './footer/footer.component';
 import { LogoIconComponent } from './icons/logo-icon/logo-icon.component';
+import { CoinsTableComponent } from './tables/coins-table/coins-table.component';
+import { HistoryTableComponent } from './tables/history-table/history-table.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
@@ -13,15 +14,18 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     ToolbarComponent,
     LogoIconComponent,
     FooterComponent,
+    ConvertResultCardComponent,
     CoinsTableComponent,
-    ConvertResultCardComponent
+    HistoryTableComponent
+
   ],
   exports: [
     ToolbarComponent,
     LogoIconComponent,
     FooterComponent,
     CoinsTableComponent,
-    ConvertResultCardComponent
+    ConvertResultCardComponent,
+    HistoryTableComponent
   ],
 })
 export class ComponentsModule {}

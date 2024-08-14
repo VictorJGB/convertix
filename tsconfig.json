@@ -5,10 +5,12 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "strict": true,
+    "baseUrl": ".",
     "paths": {
-      "components/*": ["./src/app/components/*"],
-      "pages/*": ["./src/app/pages/*"],
-      "services/*": ["./src/app/services/*"]
+      "@app/*": ["./src/app/*"],
+      "@components/*": ["./src/app/components/*"],
+      "@pages/*": ["./src/app/pages/*"],
+      "@services/*": ["./src/app/services/*"]
     },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
