@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
 
+// envs
+import { API_URL } from '@app/env/environment';
+
 // Http
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
-export interface Coin {
-  code: string;
-  value: string;
-}
+// interfaces
+import Coin from '@interfaces/coin';
+import ConvertResponse from '@interfaces/convert';
 
-export interface ConvertResponse {
-  amount: number;
-  base: string;
-  date: string;
-  rates: Record<string, number>;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -22,10 +18,10 @@ export interface ConvertResponse {
 export class CoinsService {
   constructor(private http: HttpClient) {}
 
-  private API_URL = 'https://api.frankfurter.app';
+  url = API_URL
 
   getCoins(): Observable<Coin[]> {
-    return this.http.get<Coin>(`${this.API_URL}/currencies`).pipe(
+    return this.http.get<Coin>(`${this.url}/currencies`).pipe(
       map((response) => {
         // converting response
         return Object.entries(response).map(([code, value]) => {
@@ -50,7 +46,7 @@ export class CoinsService {
       to,
     };
 
-    return this.http.get<ConvertResponse>(`${this.API_URL}/latest`, {
+    return this.http.get<ConvertResponse>(`${this.url}/latest`, {
       params,
     });
   }

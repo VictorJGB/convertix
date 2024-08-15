@@ -26,8 +26,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 
 // services
-import { Coin, CoinsService, ConvertResponse } from '@services/coins.service';
+import { CoinsService } from '@services/coins.service';
 import { LoadingService } from '@services/loading.service';
+
+// interfaces
+import Coin from '@interfaces/coin';
+import ConvertResponse from '@interfaces/convert';
 
 
 @Component({

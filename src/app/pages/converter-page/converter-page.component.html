@@ -4,7 +4,7 @@
   <h1 class="text-2xl text-center lg:text-3xl">Conversor de moedas</h1>
 
   @if(isLoading$ | async) {
-    <p>Carregando...</p>
+    <mat-progress-spinner mode="indeterminate" class="absolute top-0 left-0 size-full bg-black/30 text-primary-80"/>
   }
 
   @if (coins$ | async; as coins) {
