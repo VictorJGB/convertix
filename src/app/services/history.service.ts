@@ -7,7 +7,7 @@ import History from '@interfaces/history';
 })
 export class HistoryService {
 
-  private data!: History[]
+  private data: History[] = [];
 
   getHistory(): History[] {
     return this.data;

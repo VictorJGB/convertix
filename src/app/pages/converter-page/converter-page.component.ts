@@ -1,5 +1,5 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, EnvironmentInjector, runInInjectionContext } from '@angular/core';
 import { Observable } from 'rxjs';
 
 // Forms
@@ -27,11 +27,13 @@ import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 
 // services
 import { CoinsService } from '@services/coins.service';
+import { HistoryService } from '@services/history.service';
 import { LoadingService } from '@services/loading.service';
 
 // interfaces
 import Coin from '@interfaces/coin';
 import ConvertResponse from '@interfaces/convert';
+import ConvertHistory from '@interfaces/history';
 
 
 @Component({
@@ -74,7 +76,9 @@ export class ConverterPageComponent implements AfterViewInit {
   constructor(
     private readonly coinsService: CoinsService,
     private readonly formBuilder: FormBuilder,
-    private readonly loadingService: LoadingService
+    private readonly loadingService: LoadingService,
+    private readonly historyService: HistoryService,
+    private readonly environmentInjector: EnvironmentInjector
   ) {
     this.isLoading$ = loadingService.getLoading()
 
@@ -96,6 +100,24 @@ export class ConverterPageComponent implements AfterViewInit {
     return labelData?.value ?? ''
   }
 
+  // Adding the history context
+  addHistoryItem(): void {
+    runInInjectionContext(this.environmentInjector, () => {
+      const [destinationCoin, result] = Object.entries(this.convertResponse.rates)[0]
+      const historyData = this.historyService.getHistory()
+
+      const formatedData: ConvertHistory = {
+        id: historyData ? historyData.length + 1 : 1,
+        amount: this.convertResponse.amount,
+        originCoin: this.convertResponse.base,
+        destinationCoin,
+        result
+      }
+
+      this.historyService.addItem(formatedData)
+    })
+  }
+
   onSubmit(): void {
     // loading Control
     this.isSubmitting = true
@@ -105,7 +127,10 @@ export class ConverterPageComponent implements AfterViewInit {
 
     // Calling the service to convert the amount
     this.coinsService.convertCoins(amount, from, to).subscribe({
-      next: (response) => this.convertResponse = response,
+      next: (response) => {
+        this.convertResponse = response
+        this.addHistoryItem()
+      },
       complete: () => this.isSubmitting = false
     })
   }

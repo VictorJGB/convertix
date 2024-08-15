@@ -1,4 +1,4 @@
-export default interface History {
+export default interface ConvertHistory {
   id: number
   originCoin: string
   destinationCoin: string
