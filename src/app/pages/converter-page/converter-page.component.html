@@ -1,76 +1,62 @@
-<div
-  class="flex flex-col items-center justify-start col-span-1 row-span-1 gap-4 py-10"
->
+<div class="flex flex-col items-center justify-start col-span-1 row-span-1 gap-4 py-10">
   <h1 class="text-2xl text-center lg:text-3xl">Conversor de moedas</h1>
 
-  @if(isLoading$ | async) {
-    <mat-progress-spinner mode="indeterminate" class="absolute top-0 left-0 size-full bg-black/30 text-primary-80"/>
-  }
-
   @if (coins$ | async; as coins) {
-    
+
   <!-- Form -->
-  <form
-  (ngSubmit)="onSubmit()"
-    [formGroup]="convertForm"
-    class="container flex flex-col items-center justify-center gap-4"
-  >
-  <div class="flex flex-wrap items-center justify-center gap-6">
-    <!-- amount form field -->
-    <mat-form-field>
-      <mat-label>Quantidade</mat-label>
-      <input type="number" placeholder="Ex: 10" formControlName="amount" matInput />
-      @if (convertForm.controls['amount'].hasError('required')) {
+  <form (ngSubmit)="onSubmit()" [formGroup]="convertForm"
+    class="container flex flex-col items-center justify-center gap-4">
+    <div class="flex flex-wrap items-center justify-center gap-6">
+      <!-- amount form field -->
+      <mat-form-field>
+        <mat-label>Quantidade</mat-label>
+        <input type="number" placeholder="Ex: 10" formControlName="amount" matInput />
+        @if (convertForm.controls['amount'].hasError('required')) {
         <mat-error>Quantidade inválida</mat-error>
-      }
-    </mat-form-field>
-
-    <!-- FROM form field -->
-    <mat-form-field>
-      <mat-label>Moeda de Origem</mat-label>
-      <mat-select formControlName="from" required>
-        @for (coin of coins; track coin) {
-        <mat-option [value]="coin.code">{{ coin.value }}</mat-option>
         }
-      </mat-select>
-      @if (convertForm.controls['from'].hasError('required')) {
-      <mat-error>Escolha uma moeda de origem</mat-error>
-      }
-    </mat-form-field>
+      </mat-form-field>
 
-    <!-- TO form field -->
-    <mat-form-field>
-      <mat-label>Moeda de Destino</mat-label>
-      <mat-select formControlName="to" required>
-        @for (coin of coins; track coin) {
-        <mat-option [value]="coin.code">{{ coin.value }}</mat-option>
+      <!-- FROM form field -->
+      <mat-form-field>
+        <mat-label>Moeda de Origem</mat-label>
+        <mat-select formControlName="from" required>
+          @for (coin of coins; track coin) {
+          <mat-option [value]="coin.code">{{ coin.value }}</mat-option>
+          }
+        </mat-select>
+        @if (convertForm.controls['from'].hasError('required')) {
+        <mat-error>Escolha uma moeda de origem</mat-error>
         }
-      </mat-select>
-      @if (convertForm.controls['to'].hasError('required')) {
-      <mat-error>Escolha uma moeda de destino</mat-error>
-      }
-    </mat-form-field>
-  </div>
+      </mat-form-field>
+
+      <!-- TO form field -->
+      <mat-form-field>
+        <mat-label>Moeda de Destino</mat-label>
+        <mat-select formControlName="to" required>
+          @for (coin of coins; track coin) {
+          <mat-option [value]="coin.code">{{ coin.value }}</mat-option>
+          }
+        </mat-select>
+        @if (convertForm.controls['to'].hasError('required')) {
+        <mat-error>Escolha uma moeda de destino</mat-error>
+        }
+      </mat-form-field>
+    </div>
 
 
-  <!-- Submit button -->
-  <button mat-fab extended color="primary" [disabled]="convertForm.invalid || isSubmitting" type="submit">
-    @if(isSubmitting) { <fa-icon class="mr-2" size="lg" [icon]="loadingIcon" animation="spin" /> }
-    Converter
-  </button>
+    <!-- Submit button -->
+    <button mat-fab extended color="primary" [disabled]="convertForm.invalid || isSubmitting" type="submit">
+      @if(isSubmitting) { <fa-icon class="mr-2" size="lg" [icon]="loadingIcon" animation="spin" /> }
+      Converter
+    </button>
   </form>
 
   <!-- result card -->
-   @if(convertResponse){ 
-    <app-convert-result-card 
-      class="w-2/3 mt-8 lg:mt-6 lg:w-1/3"
-      [amount]="convertForm.value.amount" 
-      [originCoin]="convertForm.value.from" 
-      [originCoinLabel]="findCoinLabel(convertForm.value.from, coins)"
-      [destinyCoin]="convertForm.value.to" 
-      [destinyCoinLabel]="findCoinLabel(convertForm.value.to, coins)"
-      [result]="convertResponse.rates[convertForm.value.to]"
-    /> 
+  @if(convertResponse){
+  <app-convert-result-card class="w-2/3 mt-8 lg:mt-6 lg:w-1/3" [amount]="convertForm.value.amount"
+    [originCoin]="convertForm.value.from" [originCoinLabel]="findCoinLabel(convertForm.value.from, coins)"
+    [destinyCoin]="convertForm.value.to" [destinyCoinLabel]="findCoinLabel(convertForm.value.to, coins)"
+    [result]="convertResponse.rates[convertForm.value.to]" />
   }
-}
+  }
 </div>

@@ -15,7 +15,6 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 
 // components
@@ -28,7 +27,6 @@ import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 // services
 import { CoinsService } from '@services/coins.service';
 import { HistoryService } from '@services/history.service';
-import { LoadingService } from '@services/loading.service';
 
 // interfaces
 import Coin from '@interfaces/coin';
@@ -45,13 +43,12 @@ import ConvertHistory from '@interfaces/history';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
-    MatProgressSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
     AsyncPipe,
     FontAwesomeModule,
     ConvertResultCardComponent
-],
+  ],
   templateUrl: './converter-page.component.html',
   styleUrl: './converter-page.component.scss',
 })
@@ -68,7 +65,6 @@ export class ConverterPageComponent implements AfterViewInit {
   coins$!: Observable<Coin[]>
   convertResponse!: ConvertResponse
   isSubmitting = false
-  isLoading$!: Observable<boolean>
 
   // icons const
   loadingIcon = faRotateRight
@@ -76,26 +72,24 @@ export class ConverterPageComponent implements AfterViewInit {
   constructor(
     private readonly coinsService: CoinsService,
     private readonly formBuilder: FormBuilder,
-    private readonly loadingService: LoadingService,
     private readonly historyService: HistoryService,
     private readonly environmentInjector: EnvironmentInjector
   ) {
-    this.isLoading$ = loadingService.getLoading()
 
     this.convertForm = this.formBuilder.group({
-      amount: [10, Validators.required],
+      amount: [null, Validators.required],
       from: ['', Validators.required],
       to: ['', Validators.required],
     });
   }
 
   ngAfterViewInit(): void {
-      // Getting coins
-      this.coins$ = this.coinsService.getCoins()
+    // Getting coins
+    this.coins$ = this.coinsService.getCoins()
   }
 
   findCoinLabel(coin: string, data: Coin[]): string {
-    const labelData = data.find(({code}) => coin === code)
+    const labelData = data.find(({ code }) => coin === code)
 
     return labelData?.value ?? ''
   }
@@ -104,13 +98,27 @@ export class ConverterPageComponent implements AfterViewInit {
   addHistoryItem(): void {
     runInInjectionContext(this.environmentInjector, () => {
       const [destinationCoin, result] = Object.entries(this.convertResponse.rates)[0]
-      const historyData = this.historyService.getHistory()
+      let historyData: ConvertHistory[] = []
+      let coinData: Coin[] = []
+      let originLabel = ''
+      let destinationLabel = ''
+
+      this.coins$.subscribe({
+        next: (data) => coinData = data,
+        complete: () => {
+          originLabel = this.findCoinLabel(this.convertResponse.base, coinData)
+          destinationLabel = this.findCoinLabel(destinationCoin, coinData)
+        }
+      })
+      this.historyService.getHistory().subscribe((data) => historyData = data)
+
+      console.log({ originLabel, destinationLabel })
 
       const formatedData: ConvertHistory = {
         id: historyData ? historyData.length + 1 : 1,
         amount: this.convertResponse.amount,
-        originCoin: this.convertResponse.base,
-        destinationCoin,
+        originCoin: `${this.convertResponse.base} (${originLabel})`,
+        destinationCoin: `${destinationCoin} (${destinationLabel})`,
         result
       }
 
@@ -123,7 +131,7 @@ export class ConverterPageComponent implements AfterViewInit {
     this.isSubmitting = true
 
     // Retrieving form values
-    const {amount, from, to } = this.convertForm.value
+    const { amount, from, to } = this.convertForm.value
 
     // Calling the service to convert the amount
     this.coinsService.convertCoins(amount, from, to).subscribe({

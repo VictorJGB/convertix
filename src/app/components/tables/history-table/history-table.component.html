@@ -1,31 +1,42 @@
+@if(!dataSource.data.length) { <p class="text-center">
+  Sem registros
+
+</p>
+}
+@if(dataSource.data.length) {
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-
-  <!-- Position Column -->
-  <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  <!-- id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  <!-- origin Column -->
+  <ng-container matColumnDef="originCoin">
+    <th mat-header-cell *matHeaderCellDef> Moeda de Origem </th>
+    <td mat-cell *matCellDef="let element"> {{element.originCoin}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Weight </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+  <!-- destination Column -->
+  <ng-container matColumnDef="destinationCoin">
+    <th mat-header-cell *matHeaderCellDef> Moeda de Destino </th>
+    <td mat-cell *matCellDef="let element"> {{element.destinationCoin}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef> Symbol </th>
-    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+  <!-- amount Column -->
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef> Valor </th>
+    <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+  </ng-container>
+
+  <!-- result Column -->
+  <ng-container matColumnDef="result">
+    <th mat-header-cell *matHeaderCellDef> Resultado </th>
+    <td mat-cell *matCellDef="let element"> {{element.result}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
+}

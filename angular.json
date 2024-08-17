@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "currency-converter-v2": {
+    "convertix": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/currency-converter-v2",
+            "outputPath": "dist/convertix",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "currency-converter-v2:build:production"
+              "buildTarget": "convertix:build:production"
             },
             "development": {
-              "buildTarget": "currency-converter-v2:build:development"
+              "buildTarget": "convertix:build:development"
             }
           },
           "defaultConfiguration": "development"

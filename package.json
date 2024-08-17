@@ -1,5 +1,5 @@
 {
-  "name": "currency-converter-v2",
+  "name": "convertix",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -48,6 +48,6 @@
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.5",
     "typescript": "~5.5.2",
-    "typescript-eslint": "8.0.0-alpha.38"
+    "typescript-eslint": "^8.1.0"
   }
 }

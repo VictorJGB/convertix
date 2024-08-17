@@ -1,27 +1,32 @@
 import { Injectable } from '@angular/core';
+import ConvertHistory from '@interfaces/history';
 
 import History from '@interfaces/history';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HistoryService {
 
-  private data: History[] = [];
+  private data$ = new BehaviorSubject<ConvertHistory[]>([])
 
-  getHistory(): History[] {
-    return this.data;
+  getHistory(): Observable<ConvertHistory[]> {
+    return this.data$.asObservable()
   }
 
   addItem(item: History): void {
-    this.data.push(item)
+    const newData = [...this.data$.value, item]
+
+    this.data$.next(newData)
+
   }
 
   deleteItem(id: number): void {
     // Retrieving the item index
-    const index = this.data.findIndex((item: History) => item.id === id);
+    const index = this.data$.value.findIndex((item: History) => item.id === id);
     if (index !== -1) {
-      this.data.splice(index, 1);
+      this.data$.value.splice(index, 1);
     }
   }
 
