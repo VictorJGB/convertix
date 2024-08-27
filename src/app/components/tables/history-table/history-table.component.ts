@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EnvironmentInjector, runInInjectionContext } from '@angular/core';
+import {
+  Component,
+  EnvironmentInjector,
+  runInInjectionContext,
+} from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // material
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -11,7 +17,6 @@ import ConvertHistory from '@interfaces/history';
 // services
 import { HistoryService } from '@services/history.service';
 
-
 @Component({
   selector: 'app-history-table',
   standalone: true,
@@ -20,10 +25,19 @@ import { HistoryService } from '@services/history.service';
     CommonModule,
     MatTableModule,
     MatIconModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class HistoryTableComponent {
-  displayedColumns: string[] = ['id', 'originCoin', 'destinationCoin', 'amount', 'result'];
+  displayedColumns: string[] = [
+    'id',
+    'originCoin',
+    'destinationCoin',
+    'amount',
+    'result',
+    'actions',
+  ];
   dataSource!: MatTableDataSource<ConvertHistory>;
 
   constructor(
@@ -31,7 +45,28 @@ export class HistoryTableComponent {
     private readonly envInjector: EnvironmentInjector
   ) {
     runInInjectionContext(this.envInjector, () => {
-      this.historyService.getHistory().subscribe((history) => this.dataSource = new MatTableDataSource(history))
-    })
+      this.historyService
+        .getHistory()
+        .subscribe(
+          (history) => (this.dataSource = new MatTableDataSource(history))
+        );
+    });
+  }
+
+  deleteItem(index: number): void {
+    try {
+      this.historyService.deleteItem(index);
+    } catch (e) {
+      console.log(e);
+    }
+
+    // Updating changed data
+    runInInjectionContext(this.envInjector, () => {
+      this.historyService
+        .getHistory()
+        .subscribe(
+          (history) => (this.dataSource = new MatTableDataSource(history))
+        );
+    });
   }
 }
