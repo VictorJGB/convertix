@@ -1,9 +1,8 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
   Component,
   EnvironmentInjector,
-  runInInjectionContext,
+  runInInjectionContext
 } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -59,7 +58,7 @@ import ConvertResponse from '@interfaces/convert';
   templateUrl: './converter-page.component.html',
   styleUrl: './converter-page.component.scss',
 })
-export class ConverterPageComponent implements AfterViewInit {
+export class ConverterPageComponent {
   /**
    * Constructor for the ConverterPageComponent.
    *
@@ -90,10 +89,6 @@ export class ConverterPageComponent implements AfterViewInit {
     });
 
     loadinService.getLoading().subscribe(data => this.isLoading = data)
-  }
-
-  ngAfterViewInit(): void {
-    // Getting coins
     this.coins$ = this.coinsService.getCoins();
   }
 
