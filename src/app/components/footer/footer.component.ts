@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
@@ -13,7 +14,7 @@ import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, MatButtonModule, MatTooltipModule],
+  imports: [CommonModule, FontAwesomeModule, MatButtonModule, MatTooltipModule, RouterLink,],
   templateUrl: './footer.component.html',
 })
 export class FooterComponent {
