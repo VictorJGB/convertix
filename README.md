@@ -91,6 +91,7 @@ An easy, quick and intuitive currency converter made with angular material and a
 - Angular v18.1
 - Typescript v5.5.2
 - TailwindCSS v3.4.5
+- Zod v3.23.8
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
