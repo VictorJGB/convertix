@@ -20,6 +20,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 
 // components
@@ -35,6 +36,7 @@ import { HistoryService } from '@services/history.service';
 
 // interfaces
 import ConvertHistory from '@app/interfaces/history';
+import { LoadingService } from '@app/services/loading.service';
 import Coin from '@interfaces/coin';
 import ConvertResponse from '@interfaces/convert';
 
@@ -47,6 +49,7 @@ import ConvertResponse from '@interfaces/convert';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
     AsyncPipe,
@@ -68,6 +71,7 @@ export class ConverterPageComponent implements AfterViewInit {
   coins$!: Observable<Coin[]>;
   convertResponse!: ConvertResponse;
   isSubmitting = false;
+  isLoading!: boolean
 
   // icons const
   loadingIcon = faRotateRight;
@@ -76,13 +80,16 @@ export class ConverterPageComponent implements AfterViewInit {
     private readonly coinsService: CoinsService,
     private readonly formBuilder: FormBuilder,
     private readonly historyService: HistoryService,
-    private readonly environmentInjector: EnvironmentInjector
+    private readonly environmentInjector: EnvironmentInjector,
+    private readonly loadinService: LoadingService
   ) {
     this.convertForm = this.formBuilder.group({
       amount: [null, Validators.required],
       from: ['', Validators.required],
       to: ['', Validators.required],
     });
+
+    loadinService.getLoading().subscribe(data => this.isLoading = data)
   }
 
   ngAfterViewInit(): void {
