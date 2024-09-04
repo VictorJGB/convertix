@@ -37,6 +37,7 @@ An easy, quick and intuitive currency converter made with angular material and a
 - ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
 - ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 - ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+- ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -56,16 +57,29 @@ An easy, quick and intuitive currency converter made with angular material and a
   ```sh
   npm install npm@latest -g
   ```
+- Angular CLI
+   ```sh
+     npm install -g @angular/cli
+   ```
+   for more info, see: https://angular.dev/tools/cli/setup-local
 
 ### Installation
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/VictorJGB/repo_name
+   git clone https://github.com/VictorJGB/convertix
    ```
 2. Install NPM packages
    ```sh
    npm install
+   ```
+3. Run the project
+    ```sh
+     ng serve
+   ```
+    or
+   ```sh
+     npm run start
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
